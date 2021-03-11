@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{%block title%} hhhhhhh{%endblock%}
+{% block but %}<button value="{{ system }}" name="bt" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>{% endblock %}
+
+
+{% block content %}
+
+<form action="/moketest/" method="POST">
+   {% csrf_token %}
+<button type="submit" id ="" name="system" value="{{system}}" class="btn btn-danger float-right">MOKE TEST</button>
+</form> 
+   <div class="row">
+      <div class="box col-md-2.5"></div>
+       <div class="box1 col-md-6.5">
+         {% for home in homes %}
+         {% if home.link == system %}
+            <h4 style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif; margin: 5px;">{{home.description}}</h4>
+            {% endif %}                  
+              {% endfor %}
+            <hr>
+            {% for psc in pscs %}
+                 {% if psc.category == system %}
+                           <table>
+                                    <tr style="margin: 5%;">
+                                      <td style="padding: 10px 0; font-size: 20px; font-weight: bold;">{{psc.question}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="font-weight: bold;"> {{psc.apple}}</td>
+                                    </tr>  
+                                    <tr>
+                                       <td style="font-weight: bold;"> {{psc.boy}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="font-weight: bold;"> {{psc.cat}}</td>
+                                    </tr> 
+                                    <tr>   
+                                       <td style="font-weight: bold;"> {{psc.dog}}</td>
+                                    </tr>
+                                    <tr>
+                                                    <td style="padding: 20px 0;"><button onclick="myFunction('{{psc.id}}')" class="btn btn-outline-success">show answer</button>
+                                                      <div id={{psc.id}} style="width: 80%; height: 5%;" >
+                                                         {{psc.answer}}
+                                                      </div>
+                                                    </td>
+                                  
+                                              <script>
+                                                      var y="{{psc.id}}";
+                                                      var x = document.getElementById(y);
+                                                      x.style.display = "none";
+                                                        function myFunction(z) {
+                                                        var x = document.getElementById(z);
+                                                        if (x.style.display === "none") {
+                                                          x.style.display = "block";
+                                                        } 
+                                                        else {
+                                                          x.style.display = "none";
+                                                        }
+                                                      }
+                                                </script>
+                                        </tr>
+                                 </table><hr>
+               {% endif %}                  
+              {% endfor %} 
+        </div>
+     </div> 
+{% endblock %}
+
